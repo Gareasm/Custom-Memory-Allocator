@@ -1,0 +1,32 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "debug-sanitizers",
+      "displayName": "Debug with AddressSanitizer and UBSan",
+      "description": "Debug build with -fsanitize=address,undefined, frame pointer, and debug info",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/debug-sanitizers",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_FLAGS": "-fsanitize=address,undefined -fno-omit-frame-pointer -g",
+        "CMAKE_EXE_LINKER_FLAGS": "-fsanitize=address,undefined"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "debug-sanitizers",
+      "configurePreset": "debug-sanitizers"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "debug-sanitizers",
+      "configurePreset": "debug-sanitizers",
+      "output": {
+        "outputOnFailure": true
+      }
+    }
+  ]
+}
